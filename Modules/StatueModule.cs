@@ -125,6 +125,12 @@ namespace GodhomeRandomizer.Modules
 
         private void GetDetails(On.BossStatue.orig_UpdateDetails orig, BossStatue self)
         {
+            if (!(GameManager._instance.sceneName == SceneNames.GG_Workshop && self.name != "CompletionMawlek2"))
+            {
+                orig(self);
+                return;
+            }
+            
             try
             {
                 StatueOverride(self.statueStatePD, self.bossScene.Tier1Scene);

@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Linq;
+using System;
 
 namespace GodhomeRandomizer.Manager
 {
@@ -28,6 +29,9 @@ namespace GodhomeRandomizer.Manager
                 RCData.RuntimeLogicOverride.Subscribe(2f, EditLostArtifacts);
 
             // Add alternative check for several journal entries
+            if (ModHooks.GetMod("GrassRando") is Mod)
+                RCData.RuntimeLogicOverride.Subscribe(11f, EditGrass);
+
             if (ModHooks.GetMod("TheRealJournalRando") is Mod)
                 RCData.RuntimeLogicOverride.Subscribe(11f, EditTRJR);
             
@@ -344,6 +348,9 @@ namespace GodhomeRandomizer.Manager
 
         private static void EditRandoPlus(GenerationSettings gs, LogicManagerBuilder lmb)
         {
+            if (!GodhomeManager.GlobalSettings.Enabled)
+                return;
+
             try
             {
                 lmb.GetTerm("NAILUPGRADE");
@@ -352,7 +359,25 @@ namespace GodhomeRandomizer.Manager
                 lmb.DoLogicEdit(new("Nail_Upgradable_3", "NAILUPGRADE>2"));
                 lmb.DoLogicEdit(new("Nail_Upgradable_4", "NAILUPGRADE>3"));
             }
-            catch (KeyNotFoundException) {} // Ignore if NAILUPGRADE isn't present
+            catch (KeyNotFoundException) { } // Ignore if NAILUPGRADE isn't present
+        }
+
+        private static void EditGrass(GenerationSettings gs, LogicManagerBuilder lmb)
+        {
+            if (!GodhomeManager.GlobalSettings.Enabled)
+                return;
+
+            try
+            {
+                lmb.DoLogicEdit(new("GG_Broken_Vessel-Group_0", "*Bronze_Mark-Broken_Vessel"));
+                lmb.DoLogicEdit(new("GG_Ghost_Marmu-Group_0", "*Bronze_Mark-Marmu"));
+                lmb.DoLogicEdit(new("GG_Ghost_Marmu_V-Group_0", "*Silver_Mark-Marmu"));
+                lmb.DoLogicEdit(new("GG_Hornet_2-Group_0", "*Bronze_Mark-Hornet_2"));
+                lmb.DoLogicEdit(new("GG_Lost_Kin-Group_0", "*Bronze_Mark-Lost_Kin"));
+                lmb.DoLogicEdit(new("GG_Mega_Moss_Charger-Group_0", "*Bronze_Mark-Massive_Moss_Charger"));
+                lmb.DoLogicEdit(new("GG_Traitor_Lord-Group_0", "*Bronze_Mark-Traitor_Lord"));
+            }
+            catch (KeyNotFoundException) { } // Ignore if Godhome Grass isn't defined
         }
     }
 }

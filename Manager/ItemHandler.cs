@@ -75,7 +75,7 @@ namespace GodhomeRandomizer.Manager {
 
             builder.EditLocationRequest("Godhome_Shop", info =>
             {
-                info.getLocationDef = () => new()
+                info.getLocationDef = () => new FixedAreaLocationDef("Godhome", "Godhome")
                 {
                     Name = "Godhome_Shop",
                     SceneName = SceneNames.GG_Workshop,
@@ -198,7 +198,7 @@ namespace GodhomeRandomizer.Manager {
                     builder.AddLocationByName(location.name);
                     builder.EditLocationRequest(location.name, info =>
                     {
-                        info.getLocationDef = () => new()
+                        info.getLocationDef = () => new FixedAreaLocationDef("Godhome", "Hall of Gods")
                         {
                             Name = location.name,
                             SceneName = SceneNames.GG_Workshop,
@@ -236,7 +236,7 @@ namespace GodhomeRandomizer.Manager {
                 builder.AddLocationByName("Eternal_Ordeal");
                 builder.EditLocationRequest("Eternal_Ordeal", info =>
                 {
-                    info.getLocationDef = () => new()
+                    info.getLocationDef = () => new FixedAreaLocationDef("Godhome", "Hall of Gods")
                     {
                         Name = "Eternal_Ordeal",
                         SceneName = SceneNames.GG_Workshop,
@@ -308,7 +308,7 @@ namespace GodhomeRandomizer.Manager {
                     builder.AddLocationByName(location.name);
                     builder.EditLocationRequest(location.name, info =>
                     {
-                        info.getLocationDef = () => new()
+                        info.getLocationDef = () => new FixedAreaLocationDef("Godhome", "Godhome")
                         {
                             Name = location.name,
                             SceneName = location.pantheonID < PantheonLimitMode.Hallownest ? SceneNames.GG_Atrium : SceneNames.GG_Atrium_Roof,
@@ -336,7 +336,7 @@ namespace GodhomeRandomizer.Manager {
                 builder.AddLocationByName("Godhome_Lifeblood");
                 builder.EditLocationRequest("Godhome_Lifeblood", info =>
                 {
-                    info.getLocationDef = () => new()
+                    info.getLocationDef = () => new FixedAreaLocationDef("Godhome", "Godhome")
                     {
                         Name = "Godhome_Lifeblood",
                         SceneName = SceneNames.GG_Blue_Room,
